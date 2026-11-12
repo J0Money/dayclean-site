@@ -6,6 +6,9 @@
 <title>DayClean – Privat rengøring i Århus</title>
 <meta name="description" content="DayClean tilbyder eksklusiv privat rengøring i Århus v. Birgitte Friis.">
 <link rel="icon" href="/images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /*
   Layout: single-column editorial page, broad sage band for the hero and
@@ -129,20 +132,26 @@ h2{font-size:clamp(1.5rem,3.4vw,2rem);margin:0 0 14px}
   display:flex;align-items:center;justify-content:center;
   margin:0 0 14px;
 }
+.service:nth-child(even) .mark{
+  color:#3d7a4a;
+  background:var(--mint);
+}
 .service h3{font-size:1.05rem;margin:0 0 8px;color:var(--ink)}
 .service p{margin:0;color:var(--ink-soft);font-size:.92rem;line-height:1.55}
 
 .values{
   display:flex;gap:16px;flex-wrap:wrap;
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  padding-block:28px;
+  background:var(--mint);
+  border-radius:16px;
+  padding:28px 24px;
 }
 .value{flex:1 1 160px}
 .value .num{
-  font-family:"Fraunces",serif;color:var(--accent);
+  font-family:"Fraunces",serif;color:#3d7a4a;
   font-size:.85rem;letter-spacing:.08em;display:block;margin-bottom:6px;
 }
+.values .value h3,.values .value p{color:#2f4a35}
+.values .value p{opacity:.8}
 .value h3{margin:0 0 6px;font-size:1rem}
 .value p{margin:0;color:var(--ink-soft);font-size:.88rem;line-height:1.55}
 
@@ -195,9 +204,10 @@ textarea{resize:vertical;min-height:80px}
 }
 
 footer.band{padding-block:40px 48px}
+footer.footer-band{background:linear-gradient(180deg,var(--mint-deep),var(--mint))}
 footer .wrap{display:flex;flex-direction:column;align-items:center;gap:10px}
 footer img{height:36px}
-footer .foot-text{color:var(--ink);opacity:.75;font-size:.85rem}
+footer .foot-text{color:#2f4a35;opacity:.85;font-size:.85rem}
 
 @media (prefers-reduced-motion:no-preference){
   .service, .value{transition:transform .2s ease}
@@ -329,7 +339,7 @@ footer .foot-text{color:var(--ink);opacity:.75;font-size:.85rem}
 
 </div>
 
-<footer class="band">
+<footer class="band footer-band">
   <div class="wrap">
     <img src="/images/logo.png" alt="DayClean logo" style="height:44px" />
     <p class="foot-text">DayClean · Privat rengøring i Århus · 61 42 33 00</p>
