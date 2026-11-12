@@ -13,38 +13,41 @@
   feel of a freshly cleaned home.
 */
 :root{
-  --bg:#fcfbf8;
-  --bg-band:#b7d4c2;
-  --bg-band-deep:#9bbfac;
-  --ink:#2b3530;
-  --ink-soft:#52615a;
-  --accent:#c8553d;
-  --line:#dde3de;
+  --bg:#fdf8f6;
+  --bg-band:#c7e0cd;
+  --bg-band-deep:#a9cdb4;
+  --ink:#3a332f;
+  --ink-soft:#8a7a74;
+  --accent:#d98f85;
+  --accent-soft:#f6e1dc;
+  --line:#efdedb;
   --card:#ffffff;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#262c28;
-    --bg-band:#6f937f;
-    --bg-band-deep:#5a7b68;
-    --ink:#f3f5f2;
-    --ink-soft:#c7d0c9;
-    --accent:#e8926f;
-    --line:#434d46;
-    --card:#2d342f;
+    --bg:#2a2422;
+    --bg-band:#5f8771;
+    --bg-band-deep:#4b6f5d;
+    --ink:#f5efec;
+    --ink-soft:#cdbcb6;
+    --accent:#eab0a5;
+    --accent-soft:#4a3835;
+    --line:#473d3a;
+    --card:#332b28;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#262c28;
-  --bg-band:#6f937f;
-  --bg-band-deep:#5a7b68;
-  --ink:#f3f5f2;
-  --ink-soft:#c7d0c9;
-  --accent:#e8926f;
-  --line:#434d46;
-  --card:#2d342f;
+  --bg:#2a2422;
+  --bg-band:#5f8771;
+  --bg-band-deep:#4b6f5d;
+  --ink:#f5efec;
+  --ink-soft:#cdbcb6;
+  --accent:#eab0a5;
+  --accent-soft:#4a3835;
+  --line:#473d3a;
+  --card:#332b28;
   color-scheme: dark;
 }
 
@@ -138,9 +141,14 @@ h2{font-size:clamp(1.5rem,3.4vw,2rem);margin:0 0 14px}
 }
 .service .mark{
   font-family:"Fraunces",serif;
-  font-size:1.6rem;
+  font-size:1.1rem;
+  font-weight:600;
   color:var(--accent);
-  margin:0 0 10px;
+  background:var(--accent-soft);
+  width:34px;height:34px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 0 14px;
 }
 .service h3{font-size:1.05rem;margin:0 0 8px;color:var(--ink)}
 .service p{margin:0;color:var(--ink-soft);font-size:.92rem;line-height:1.55}
