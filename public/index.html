@@ -3,51 +3,58 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>DayClean – Privat rengøring i Århus</title>
+<title>DayClean: Privat rengøring i Århus</title>
 <meta name="description" content="DayClean tilbyder eksklusiv privat rengøring i Århus v. Birgitte Friis.">
 <link rel="icon" href="/images/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* Hallmark · built: the project · redesign: polish
+   critique: eyebrows and tracked labels cut, accent and ink-soft darkened for AA contrast,
+   footer meta de-dotted, fonts lifted into tokens, copy trimmed to the 80-word screen budget
+   waived: 44c (hero fill) · 78 (section head scale) — layout-level, left for a restyle pass */
 /*
   Layout: single-column editorial page, broad sage band for the hero and
   footer bookending white content sections — mirrors the calm, uncluttered
   feel of a freshly cleaned home.
 */
 :root{
-  --bg:#ffffff;
+  --bg:#fefbfa;
   --bg-band:#d5f3d8;
   --bg-band-deep:#b9e4bf;
   --ink:#2f3d32;
-  --ink-soft:#73857a;
-  --accent:#e0607e;
+  --ink-soft:#4c5a52;
+  --accent:#9c3450;
   --accent-soft:#f2c7c7;
+  --on-accent:#fff7f6;
   --mint:#d5f3d8;
   --mint-deep:#b9e4bf;
-  --line:#e3efe4;
+  --line:#7e9686;
   --card:#fffafb;
+  --font-body:"Quicksand",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-feature:"Courier Prime","Courier New",monospace;
   color-scheme: light;
 }
 /* DayClean holder sig til ét lyst, cherry-blossom-farvesæt uanset
    besøgendes system-indstilling (ingen separat dark mode). */
 
 *{box-sizing:border-box}
-html,body{margin:0;padding:0}
+html,body{margin:0;padding:0;overflow-x:clip}
 body{
   background:var(--bg);
   color:var(--ink);
-  font-family:"Quicksand",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-family:var(--font-body);
   padding-left:max(16px, env(safe-area-inset-left,0px));
   padding-right:max(16px, env(safe-area-inset-right,0px));
 }
 h1,h2,h3{
-  font-family:"Quicksand",sans-serif;
+  font-family:var(--font-body);
   text-wrap:balance;
   font-weight:700;
 }
 .wordmark,.hero-title{
-  font-family:"Courier Prime","Courier New",monospace;
+  font-family:var(--font-feature);
   font-weight:700;
 }
 a{color:inherit}
@@ -71,17 +78,11 @@ img{max-width:100%;display:block}
 .nav img{height:46px;width:auto}
 .wordmark{font-size:1.5rem;letter-spacing:.01em;color:var(--ink)}
 
-.hero-eyebrow{
-  color:var(--accent);
-  font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;
-  font-weight:700;
-  margin:0 0 14px;
-}
 .hero-title{
   color:var(--ink);
   font-size:clamp(2.1rem,5vw,3.1rem);
   line-height:1.08;
-  margin:0 0 18px;
+  margin:0 0 20px;
 }
 .hero-sub{
   color:var(--ink-soft);
@@ -90,10 +91,13 @@ img{max-width:100%;display:block}
   max-width:46ch;
   margin:0 auto 32px;
 }
-.hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.hero-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 .btn{
-  display:inline-block;
-  padding:13px 26px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  padding:16px 28px;
   border-radius:999px;
   font-size:.95rem;
   font-weight:600;
@@ -101,32 +105,29 @@ img{max-width:100%;display:block}
   border:1.5px solid transparent;
   cursor:pointer;
 }
-.btn-primary{background:var(--accent);color:#fff}
+.btn-primary{background:var(--accent);color:var(--on-accent)}
 .btn-ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn:disabled,button:disabled{opacity:.5;cursor:not-allowed}
 
 section{padding-block:64px}
 section.tight{padding-block:48px}
-.eyebrow{
-  font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--accent);font-weight:700;margin:0 0 10px;
-}
-h2{font-size:clamp(1.5rem,3.4vw,2rem);margin:0 0 14px}
+h2{font-size:clamp(1.5rem,3.4vw,2rem);margin:0 0 16px}
 .lede{color:var(--ink-soft);font-size:1.02rem;line-height:1.7;max-width:62ch;margin:0 0 36px}
 
 .services{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:18px;
+  gap:16px;
 }
 @media (max-width:560px){.services{grid-template-columns:1fr}}
 .service{
   background:var(--card);
   border:1px solid var(--line);
   border-radius:14px;
-  padding:22px 22px 24px;
+  padding:24px;
 }
 .service .mark{
-  font-family:"Courier Prime",monospace;
+  font-family:var(--font-feature);
   font-size:1.1rem;
   font-weight:600;
   color:var(--accent);
@@ -134,7 +135,7 @@ h2{font-size:clamp(1.5rem,3.4vw,2rem);margin:0 0 14px}
   width:34px;height:34px;
   border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  margin:0 0 14px;
+  margin:0 0 16px;
 }
 .service h3{font-size:1.05rem;margin:0 0 8px;color:var(--ink)}
 .service p{margin:0;color:var(--ink-soft);font-size:.92rem;line-height:1.55}
@@ -146,11 +147,7 @@ h2{font-size:clamp(1.5rem,3.4vw,2rem);margin:0 0 14px}
   padding-block:28px;
 }
 .value{flex:1 1 160px}
-.value .num{
-  font-family:"Courier Prime",monospace;color:var(--accent);
-  font-size:.85rem;letter-spacing:.08em;display:block;margin-bottom:6px;
-}
-.value h3{margin:0 0 6px;font-size:1rem}
+.value h3{margin:0 0 8px;font-size:1rem}
 .value p{margin:0;color:var(--ink-soft);font-size:.88rem;line-height:1.55}
 
 .about{
@@ -166,8 +163,8 @@ h2{font-size:clamp(1.5rem,3.4vw,2rem);margin:0 0 14px}
 }
 .about-photo img{height:70px;width:auto;opacity:.85}
 .about-text{flex:1 1 320px;min-width:0}
-.about-text p{color:var(--ink-soft);line-height:1.7;margin:0 0 10px}
-.signature{font-family:"Quicksand",sans-serif;font-style:italic;font-weight:600;color:var(--ink);font-size:1.15rem;margin-top:14px}
+.about-text p{color:var(--ink-soft);line-height:1.7;margin:0 0 12px}
+.signature{font-family:var(--font-body);font-style:italic;font-weight:600;color:var(--ink);font-size:1.15rem;margin-top:16px}
 
 .contact-card{
   background:var(--card);
@@ -178,23 +175,25 @@ h2{font-size:clamp(1.5rem,3.4vw,2rem);margin:0 0 14px}
 }
 .contact-info{flex:1 1 220px;min-width:0}
 .contact-info .row{margin-bottom:16px}
-.contact-info .label{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 4px}
+.contact-info .label{font-size:.82rem;color:var(--ink-soft);margin:0 0 4px}
 .contact-info .value-row{font-size:1.15rem;font-weight:600;word-break:break-word;display:flex;align-items:center;flex-wrap:wrap;gap:8px}
 .contact-info a{text-decoration:none}
 .copy-btn{
   background:transparent;border:1px solid var(--line);border-radius:8px;
-  padding:4px 10px;font-size:.75rem;color:var(--ink-soft);cursor:pointer;
+  padding:16px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;
+  font-size:.75rem;color:var(--ink-soft);cursor:pointer;
 }
 .copy-btn:active{transform:scale(.97)}
 
 form{flex:1 1 260px;min-width:0;display:flex;flex-direction:column;gap:12px}
 label{font-size:.82rem;color:var(--ink-soft)}
 input,textarea{
-  width:100%;padding:11px 12px;border-radius:8px;
+  width:100%;padding:12px;border-radius:8px;
   border:1px solid var(--line);background:var(--bg);color:var(--ink);
   font-family:inherit;font-size:.92rem;
 }
 input:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
+input:disabled,textarea:disabled{opacity:.6;cursor:not-allowed;background:var(--line)}
 textarea{resize:vertical;min-height:80px}
 .form-note{font-size:.78rem;color:var(--ink-soft);margin:0}
 .toast{
@@ -202,9 +201,9 @@ textarea{resize:vertical;min-height:80px}
 }
 
 footer.band{padding-block:40px 48px}
-footer .wrap{display:flex;flex-direction:column;align-items:center;gap:10px}
-footer img{height:36px}
-footer .foot-text{color:var(--ink);opacity:.75;font-size:.85rem}
+footer .wrap{display:flex;flex-direction:column;align-items:center;gap:8px}
+footer img{height:36px;margin-bottom:4px}
+footer .foot-text{color:var(--ink);opacity:.75;font-size:.85rem;margin:0}
 
 @media (prefers-reduced-motion:no-preference){
   .service, .value{transition:transform .2s ease}
@@ -220,7 +219,6 @@ footer .foot-text{color:var(--ink);opacity:.75;font-size:.85rem}
       <img src="/images/logo.png" alt="DayClean logo" />
       <span class="wordmark">DayClean</span>
     </div>
-    <p class="hero-eyebrow">Privat rengøring i Århus</p>
     <h1 class="hero-title">Et rent hjem, uden at du selv skal løfte en finger</h1>
     <p class="hero-sub">DayClean giver dig tid tilbage. Diskret, pålidelig og grundig rengøring af dit private hjem i Århus-området, leveret med maksimal service og en fast, personlig hånd.</p>
     <div class="hero-actions">
@@ -233,29 +231,28 @@ footer .foot-text{color:var(--ink);opacity:.75;font-size:.85rem}
 <div class="wrap">
 
   <section class="tight" id="ydelser">
-    <p class="eyebrow">Ydelser</p>
     <h2>Hvad jeg tager mig af</h2>
-    <p class="lede">Alt det, der skal til for at dit hjem føles rent, roligt og i orden, hver dag, ikke kun når der er gæster.</p>
+    <p class="lede">Alt det, dit hjem har brug for, hver dag, ikke kun når der er gæster.</p>
     <div class="services">
       <div class="service">
         <p class="mark">01</p>
         <h3>360° rengøring i hjemmet</h3>
-        <p>Grundig rengøring af alle rum, fra køkken og bad til de hjørner der normalt bliver glemt.</p>
+        <p>Grundig rengøring af alle rum, fra køkken og bad til de glemte hjørner.</p>
       </div>
       <div class="service">
         <p class="mark">02</p>
         <h3>Diverse indkøb</h3>
-        <p>Dagligvarer og ærinder klaret, så køleskabet altid er fyldt, når du har brug for det.</p>
+        <p>Dagligvarer og ærinder klaret, så køleskabet altid er fyldt.</p>
       </div>
       <div class="service">
         <p class="mark">03</p>
         <h3>Madlavning</h3>
-        <p>Hjemmelavet mad til hverdag eller når der skal være lidt ekstra på bordet.</p>
+        <p>Hjemmelavet mad til hverdag, eller til en særlig anledning.</p>
       </div>
       <div class="service">
         <p class="mark">04</p>
         <h3>Have og IT-opgaver</h3>
-        <p>Lettere havearbejde og de små praktiske IT-opgaver, der ellers bliver liggende.</p>
+        <p>Lettere havearbejde og små IT-opgaver, der ellers bliver liggende.</p>
       </div>
     </div>
   </section>
@@ -263,17 +260,14 @@ footer .foot-text{color:var(--ink);opacity:.75;font-size:.85rem}
   <section class="tight">
     <div class="values">
       <div class="value">
-        <span class="num">—</span>
         <h3>Maksimal service</h3>
         <p>Din tid og dit hjem bliver behandlet med samme omhu, hver gang.</p>
       </div>
       <div class="value">
-        <span class="num">—</span>
         <h3>Effektivitet</h3>
         <p>Opgaverne løses grundigt uden at fylde unødigt i din dag.</p>
       </div>
       <div class="value">
-        <span class="num">—</span>
         <h3>Stabilitet</h3>
         <p>Samme faste aftale, samme ansigt, hver eneste gang.</p>
       </div>
@@ -281,7 +275,6 @@ footer .foot-text{color:var(--ink);opacity:.75;font-size:.85rem}
   </section>
 
   <section class="tight">
-    <p class="eyebrow">Om DayClean</p>
     <h2>Birgitte Friis</h2>
     <div class="about">
       <div class="about-photo">
@@ -290,13 +283,12 @@ footer .foot-text{color:var(--ink);opacity:.75;font-size:.85rem}
       <div class="about-text">
         <p>DayClean er drevet af Birgitte Friis, der tilbyder eksklusiv service i dit private hjem i Århus-området. Udført til perfektion, med fokus på det, der faktisk gør en forskel i hverdagen.</p>
         <p>Du får en fast kontaktperson, der kender dit hjem og dine ønsker, frem for et skiftende hold.</p>
-        <p class="signature">— Birgitte</p>
+        <p class="signature">Birgitte</p>
       </div>
     </div>
   </section>
 
   <section id="kontakt">
-    <p class="eyebrow">Kontakt</p>
     <h2>Lad os finde en aftale, der passer dig</h2>
     <p class="lede">Ring, skriv, eller læg en besked, så vender jeg tilbage hurtigst muligt.</p>
     <div class="contact-card">
@@ -339,7 +331,8 @@ footer .foot-text{color:var(--ink);opacity:.75;font-size:.85rem}
 <footer class="band footer-band">
   <div class="wrap">
     <img src="/images/logo.png" alt="DayClean logo" style="height:44px" />
-    <p class="foot-text">DayClean · Privat rengøring i Århus · 61 42 33 00</p>
+    <p class="foot-text">DayClean, privat rengøring i Århus</p>
+    <p class="foot-text">61 42 33 00</p>
   </div>
 </footer>
 
