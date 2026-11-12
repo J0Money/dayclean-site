@@ -26,36 +26,8 @@
   --card:#fffafb;
   color-scheme: light;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#2b2224;
-    --bg-band:#7a4a56;
-    --bg-band-deep:#5e3840;
-    --ink:#f6ecee;
-    --ink-soft:#cfb3b8;
-    --accent:#ffb7c5;
-    --accent-soft:#4a3338;
-    --mint:#3a4a3d;
-    --mint-deep:#2f3d32;
-    --line:#4a3a3d;
-    --card:#342a2c;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#2b2224;
-  --bg-band:#7a4a56;
-  --bg-band-deep:#5e3840;
-  --ink:#f6ecee;
-  --ink-soft:#cfb3b8;
-  --accent:#ffb7c5;
-  --accent-soft:#4a3338;
-  --mint:#3a4a3d;
-  --mint-deep:#2f3d32;
-  --line:#4a3a3d;
-  --card:#342a2c;
-  color-scheme: dark;
-}
+/* DayClean holder sig til ét lyst, cherry-blossom-farvesæt uanset
+   besøgendes system-indstilling (ingen separat dark mode). */
 
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
