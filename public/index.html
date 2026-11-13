@@ -5,20 +5,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>DayClean: Privat rengøring i Århus</title>
 <meta name="description" content="DayClean tilbyder eksklusiv privat rengøring i Århus v. Birgitte Friis.">
+<meta name="theme-color" content="#d5f3d8">
 <link rel="icon" href="/images/logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* Hallmark · built: the project · redesign: polish
-   critique: eyebrows and tracked labels cut, accent and ink-soft darkened for AA contrast,
-   footer meta de-dotted, fonts lifted into tokens, copy trimmed to the 80-word screen budget
-   waived: 44c (hero fill) · 78 (section head scale) — layout-level, left for a restyle pass */
-/*
-  Layout: single-column editorial page, broad sage band for the hero and
-  footer bookending white content sections — mirrors the calm, uncluttered
-  feel of a freshly cleaned home.
-*/
+/* Hallmark · built: the project · redesign: full
+   critique: asymmetric hero with an organic illustration panel, wave dividers between
+   bands, line-icons replacing plain numbered marks, a bigger feature-font type scale
+   for section heads, a dashed portrait ring and a decorative quote mark; brand kept
+   (sage + rose, Quicksand/Courier Prime, self-hosted), content and wiring unchanged
+   waived: none — 44c and 78 from the polish pass are settled by this layout */
+@font-face{
+  font-family:"Courier Prime";
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+  src:url(/fonts/courier-prime-400.woff2) format("woff2");
+}
+@font-face{
+  font-family:"Courier Prime";
+  font-style:normal;
+  font-weight:700;
+  font-display:swap;
+  src:url(/fonts/courier-prime-700.woff2) format("woff2");
+}
+@font-face{
+  font-family:"Quicksand";
+  font-style:normal;
+  font-weight:400 700;
+  font-display:swap;
+  src:url(/fonts/quicksand-variable.woff2) format("woff2");
+}
 :root{
   --bg:#fefbfa;
   --bg-band:#d5f3d8;
@@ -34,6 +50,8 @@
   --card:#fffafb;
   --font-body:"Quicksand",system-ui,-apple-system,"Segoe UI",sans-serif;
   --font-feature:"Courier Prime","Courier New",monospace;
+  --shadow-accent:rgba(156,52,80,.5);
+  --shadow-ink:rgba(47,61,50,.4);
   color-scheme: light;
 }
 /* DayClean holder sig til ét lyst, cherry-blossom-farvesæt uanset
@@ -41,57 +59,93 @@
 
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;overflow-x:clip}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.reveal{opacity:1;transform:none}
+html.js-anim .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
+html.js-anim .reveal.is-visible{opacity:1;transform:none}
+html.js-anim .services .service:nth-child(2){transition-delay:.08s}
+html.js-anim .services .service:nth-child(3){transition-delay:.16s}
+html.js-anim .services .service:nth-child(4){transition-delay:.24s}
+html.js-anim .values .value:nth-child(2){transition-delay:.08s}
+html.js-anim .values .value:nth-child(3){transition-delay:.16s}
 body{
   background:var(--bg);
   color:var(--ink);
   font-family:var(--font-body);
   padding-left:max(16px, env(safe-area-inset-left,0px));
   padding-right:max(16px, env(safe-area-inset-right,0px));
+  position:relative;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:radial-gradient(var(--line) 1px, transparent 1px);
+  background-size:24px 24px;
+  opacity:.05;
+  pointer-events:none;
+  z-index:0;
 }
 h1,h2,h3{
-  font-family:var(--font-body);
+  font-family:var(--font-feature);
   text-wrap:balance;
   font-weight:700;
-}
-.wordmark,.hero-title{
-  font-family:var(--font-feature);
-  font-weight:700;
+  overflow-wrap:break-word;
+  min-width:0;
 }
 a{color:inherit}
-img{max-width:100%;display:block}
+img,svg{max-width:100%;display:block}
+*:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
-.wrap{max-width:760px;margin:0 auto}
+.wrap{max-width:760px;margin:0 auto;position:relative;z-index:1}
+.wrap-wide{max-width:1080px}
 .band{
   background:linear-gradient(180deg,var(--bg-band),var(--bg-band-deep));
-  padding-block:56px 64px;
+  padding-block:76px 0;
   margin-left:calc(-1 * max(16px, env(safe-area-inset-left,0px)));
   margin-right:calc(-1 * max(16px, env(safe-area-inset-right,0px)));
   padding-left:max(16px, env(safe-area-inset-left,0px));
   padding-right:max(16px, env(safe-area-inset-right,0px));
+  position:relative;
+  overflow:hidden;
 }
-.band .wrap{text-align:center}
 
 .nav{
   display:flex;align-items:center;justify-content:center;gap:12px;
-  margin-bottom:40px;
+  margin-bottom:28px;
 }
-.nav img{height:46px;width:auto}
-.wordmark{font-size:1.5rem;letter-spacing:.01em;color:var(--ink)}
+.nav img{height:42px;width:auto}
+.wordmark{font-family:var(--font-feature);font-size:1.4rem;letter-spacing:.01em;color:var(--ink);font-weight:700}
 
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.08fr) minmax(0,0.92fr);
+  gap:36px;
+  align-items:center;
+  padding-bottom:68px;
+}
+@media (max-width:820px){
+  .hero-grid{grid-template-columns:minmax(0,1fr);text-align:center}
+  .hero-copy{order:1}
+  .hero-visual{order:0;max-width:280px;margin:0 auto}
+  .hero-actions{justify-content:center}
+}
 .hero-title{
   color:var(--ink);
-  font-size:clamp(2.1rem,5vw,3.1rem);
-  line-height:1.08;
+  font-size:clamp(2.3rem,5.4vw,3.4rem);
+  line-height:1.05;
   margin:0 0 20px;
 }
 .hero-sub{
   color:var(--ink-soft);
-  font-size:1.1rem;
+  font-size:1.08rem;
   line-height:1.6;
   max-width:46ch;
-  margin:0 auto 32px;
+  margin:0 0 28px;
 }
-.hero-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+@media (max-width:820px){.hero-sub{margin-inline:auto}}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap}
 .btn{
   display:inline-flex;
   align-items:center;
@@ -105,14 +159,61 @@ img{max-width:100%;display:block}
   border:1.5px solid transparent;
   cursor:pointer;
 }
+@media (prefers-reduced-motion:no-preference){
+  .btn{transition:transform .15s ease, box-shadow .15s ease}
+  .btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 22px -10px var(--shadow-accent)}
+  .btn-ghost:hover{transform:translateY(-1px)}
+}
 .btn-primary{background:var(--accent);color:var(--on-accent)}
 .btn-ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
 .btn:disabled,button:disabled{opacity:.5;cursor:not-allowed}
+.btn:active{transform:scale(.97)}
+
+.hero-visual{position:relative}
+.visual-blob{
+  position:relative;
+  aspect-ratio:1;
+  width:100%;
+  border-radius:42% 58% 61% 39% / 45% 41% 59% 55%;
+  background:var(--mint-deep);
+  display:flex;align-items:center;justify-content:center;
+  z-index:1;
+}
+.visual-blob img{height:52%;width:auto;opacity:.92}
+@media (prefers-reduced-motion:no-preference){
+  .visual-blob{animation:blob-float 6s ease-in-out infinite}
+  @keyframes blob-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+}
+.stamp{
+  position:absolute;
+  bottom:-14px;right:-14px;
+  width:112px;height:112px;
+  transform:rotate(-10deg);
+  z-index:2;
+}
+@media (max-width:820px){.stamp{right:50%;transform:translateX(68px) rotate(-10deg)}}
+.stamp-ring{fill:var(--card);stroke:var(--accent);stroke-width:2}
+.stamp-ring-inner{fill:none;stroke:var(--accent);stroke-width:1;stroke-dasharray:3 4}
+.stamp-text{font-family:var(--font-feature);font-size:11px;letter-spacing:.4px;fill:var(--accent)}
+.stamp-heart{fill:none;stroke:var(--accent);stroke-width:2}
+
+.wave{
+  display:block;
+  height:56px;
+  margin-bottom:-1px;
+  margin-left:calc(-1 * max(16px, env(safe-area-inset-left,0px)));
+  margin-right:calc(-1 * max(16px, env(safe-area-inset-right,0px)));
+  width:calc(100% + max(16px, env(safe-area-inset-left,0px)) + max(16px, env(safe-area-inset-right,0px)));
+  max-width:none;
+}
+.wave path{fill:var(--bg)}
+.wave-up{transform:scaleY(-1)}
+.wave-up path{fill:var(--bg-band)}
 
 section{padding-block:64px}
-section.tight{padding-block:48px}
-h2{font-size:clamp(1.5rem,3.4vw,2rem);margin:0 0 16px}
-.lede{color:var(--ink-soft);font-size:1.02rem;line-height:1.7;max-width:62ch;margin:0 0 36px}
+section.tight{padding-block:48px}h2{font-size:clamp(1.8rem,4vw,2.6rem);margin:0 0 12px;line-height:1.12;position:relative}
+h2::after{content:"";display:block;width:56px;height:4px;background:var(--accent);border-radius:999px;margin-top:16px}
+.lede{color:var(--ink-soft);font-size:1.02rem;line-height:1.7;max-width:62ch;margin:0 0 32px}
 
 .services{
   display:grid;
@@ -123,69 +224,118 @@ h2{font-size:clamp(1.5rem,3.4vw,2rem);margin:0 0 16px}
 .service{
   background:var(--card);
   border:1px solid var(--line);
-  border-radius:14px;
+  border-radius:16px;
   padding:24px;
 }
-.service .mark{
-  font-family:var(--font-feature);
-  font-size:1.1rem;
-  font-weight:600;
+@media (prefers-reduced-motion:no-preference){
+  .service{transition:transform .2s ease, box-shadow .2s ease}
+  .service:hover{transform:translateY(-3px);box-shadow:0 14px 28px -18px var(--shadow-ink)}
+}
+.service-icon{
   color:var(--accent);
-  background:var(--accent-soft);
-  width:34px;height:34px;
-  border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   margin:0 0 16px;
 }
-.service h3{font-size:1.05rem;margin:0 0 8px;color:var(--ink)}
+.service-icon svg{width:28px;height:28px}
+@media (prefers-reduced-motion:no-preference){
+  .service-icon svg{transition:transform .25s ease}
+  .service:hover .service-icon svg{transform:scale(1.12) rotate(-4deg)}
+}
+.service h3{font-size:1.05rem;margin:0 0 8px;color:var(--ink);font-family:var(--font-body)}
 .service p{margin:0;color:var(--ink-soft);font-size:.92rem;line-height:1.55}
 
 .values{
-  display:flex;gap:16px;flex-wrap:wrap;
+  display:grid;
+  grid-template-columns:1.3fr 1fr 1fr;
+  gap:24px;
   border-top:1px solid var(--line);
   border-bottom:1px solid var(--line);
-  padding-block:28px;
+  padding-block:32px;
 }
-.value{flex:1 1 160px}
-.value h3{margin:0 0 8px;font-size:1rem}
+@media (max-width:680px){.values{grid-template-columns:1fr}}
+.value{display:flex;gap:16px;align-items:flex-start}
+.value-icon{
+  flex:0 0 auto;margin-top:2px;
+  display:flex;align-items:center;justify-content:center;color:var(--accent);
+}
+.value-icon svg{width:22px;height:22px}
+.value h3{margin:0 0 8px;font-size:1rem;font-family:var(--font-body)}
 .value p{margin:0;color:var(--ink-soft);font-size:.88rem;line-height:1.55}
 
 .about{
-  display:flex;gap:28px;align-items:center;flex-wrap:wrap;
+  display:flex;gap:36px;align-items:center;flex-wrap:wrap;
+  position:relative;
+}
+.about::before{
+  content:"";
+  position:absolute;
+  left:-24px;top:50%;
+  width:200px;height:200px;
+  transform:translateY(-50%);
+  border-radius:38% 62% 55% 45% / 48% 42% 58% 52%;
+  background:var(--mint);
+  opacity:.5;
+  z-index:0;
+}
+.about-ring{
+  flex:0 0 136px;
+  width:136px;height:136px;
+  border-radius:50%;
+  border:2px dashed var(--line);
+  padding:8px;
+  transform:rotate(-5deg);
+  position:relative;
+  z-index:1;
 }
 .about-photo{
-  flex:0 0 120px;
-  width:120px;height:120px;
+  width:100%;height:100%;
   border-radius:50%;
   background:var(--mint);
   display:flex;align-items:center;justify-content:center;
   overflow:hidden;
+  transform:rotate(5deg);
 }
-.about-photo img{height:70px;width:auto;opacity:.85}
-.about-text{flex:1 1 320px;min-width:0}
-.about-text p{color:var(--ink-soft);line-height:1.7;margin:0 0 12px}
-.signature{font-family:var(--font-body);font-style:italic;font-weight:600;color:var(--ink);font-size:1.15rem;margin-top:16px}
+.about-photo img{height:62%;width:auto;opacity:.85}
+.about-text{flex:1 1 320px;min-width:0;position:relative}
+.about-text .quote-mark{
+  position:absolute;top:-34px;left:-6px;
+  font-family:var(--font-feature);
+  font-size:5rem;line-height:1;
+  color:var(--accent-soft);
+  z-index:0;
+  user-select:none;
+}
+.about-text p{color:var(--ink-soft);line-height:1.7;margin:0 0 12px;position:relative;z-index:1}
+.signature{font-family:var(--font-body);font-style:italic;font-weight:600;color:var(--ink);font-size:1.15rem;margin-top:16px;position:relative;z-index:1}
 
 .contact-card{
   background:var(--card);
   border:1px solid var(--line);
-  border-radius:16px;
+  border-radius:20px;
   padding:32px;
   display:flex;gap:32px;flex-wrap:wrap;
+  position:relative;
+  overflow:hidden;
 }
-.contact-info{flex:1 1 220px;min-width:0}
-.contact-info .row{margin-bottom:16px}
+.contact-card::before{
+  content:"";
+  position:absolute;top:0;right:0;
+  width:120px;height:120px;
+  background:var(--accent-soft);
+  opacity:.5;
+  border-radius:0 0 0 100%;
+  pointer-events:none;
+}
+.contact-info{flex:1 1 220px;min-width:0;position:relative}
+.contact-info .row{margin-bottom:16px;display:flex;gap:12px;align-items:flex-start}
+.contact-info .row-icon{flex:0 0 auto;color:var(--accent);display:flex;align-items:center;justify-content:center;margin-top:4px}
+.contact-info .row-icon svg{width:18px;height:18px}
 .contact-info .label{font-size:.82rem;color:var(--ink-soft);margin:0 0 4px}
 .contact-info .value-row{font-size:1.15rem;font-weight:600;word-break:break-word;display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+@media (max-width:380px){.contact-info .value-row{font-size:1rem}}
 .contact-info a{text-decoration:none}
-.copy-btn{
-  background:transparent;border:1px solid var(--line);border-radius:8px;
-  padding:16px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;
-  font-size:.75rem;color:var(--ink-soft);cursor:pointer;
-}
-.copy-btn:active{transform:scale(.97)}
 
-form{flex:1 1 260px;min-width:0;display:flex;flex-direction:column;gap:12px}
+form{flex:1 1 260px;min-width:0;display:flex;flex-direction:column;gap:12px;position:relative}
 label{font-size:.82rem;color:var(--ink-soft)}
 input,textarea{
   width:100%;padding:12px;border-radius:8px;
@@ -200,32 +350,72 @@ textarea{resize:vertical;min-height:80px}
   font-size:.85rem;color:var(--accent);font-weight:600;min-height:1.2em;
 }
 
-footer.band{padding-block:40px 48px}
-footer .wrap{display:flex;flex-direction:column;align-items:center;gap:8px}
-footer img{height:36px;margin-bottom:4px}
-footer .foot-text{color:var(--ink);opacity:.75;font-size:.85rem;margin:0}
-
-@media (prefers-reduced-motion:no-preference){
-  .service, .value{transition:transform .2s ease}
-  .service:hover{transform:translateY(-2px)}
+footer.band{padding-block:0 0;margin-top:8px}
+footer .foot-inner{padding-block:48px 32px}
+.foot-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr);
+  gap:32px;
 }
+@media (max-width:680px){
+  .foot-grid{grid-template-columns:minmax(0,1fr);text-align:center}
+  .foot-logo{justify-content:center}
+}
+.foot-logo{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.foot-logo img{height:34px;width:auto}
+footer .foot-brand .foot-text{max-width:32ch}
+@media (max-width:680px){footer .foot-brand .foot-text{margin-inline:auto}}
+.foot-links{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+@media (max-width:680px){.foot-links{align-items:center}}
+.foot-heading{font-size:.78rem;color:var(--ink-soft);margin:0 0 4px}
+.foot-links a:not(.btn){font-size:.92rem;color:var(--ink);text-decoration:none}
+@media (prefers-reduced-motion:no-preference){.foot-links a:not(.btn){transition:color .15s ease}}
+.foot-links a:not(.btn):hover{color:var(--accent)}
+.foot-cta{margin-top:4px;padding:12px 24px;min-height:44px}
+.foot-bottom{
+  border-top:1px solid var(--line);
+  margin-top:36px;padding-top:20px;
+  text-align:center;
+}
+footer .foot-text{color:var(--ink);opacity:.75;font-size:.85rem;margin:0}
 </style>
 </head>
 <body>
 
-<div class="band">
-  <div class="wrap">
+<div class="band hero-band">
+  <div class="wrap wrap-wide">
     <div class="nav">
       <img src="/images/logo.png" alt="DayClean logo" />
       <span class="wordmark">DayClean</span>
     </div>
-    <h1 class="hero-title">Et hjem, der bliver kendt, ikke bare rengjort</h1>
-    <p class="hero-sub">Hos DayClean møder du altid det samme ansigt, frem for nye folk fra et stort rengøringsfirma hver gang. Det handler om en relation der bygger på tillid, og tid til at lære hinanden og dit hjem i Århus-området at kende.</p>
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="#kontakt">Book en snak</a>
-      <a class="btn btn-ghost" href="#ydelser">Se ydelser</a>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <h1 class="hero-title">Et hjem, der bliver kendt, ikke bare rengjort</h1>
+        <p class="hero-sub">Hos DayClean møder du altid det samme ansigt, frem for nye folk fra et stort rengøringsfirma hver gang. Det handler om en relation der bygger på tillid, og tid til at lære hinanden og dit hjem i Århus-området at kende.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#kontakt">Book en snak</a>
+          <a class="btn btn-ghost" href="#ydelser">Se ydelser</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="visual-blob">
+          <img src="/images/logo.png" alt="" />
+        </div>
+        <svg class="stamp" aria-hidden="true" viewBox="0 0 160 160">
+          <defs>
+            <path id="stampTop" d="M 22,84 A 62,62 0 0 1 138,84" />
+            <path id="stampBottom" d="M 22,84 A 62,62 0 0 0 138,84" />
+          </defs>
+          <circle class="stamp-ring" cx="80" cy="80" r="76" />
+          <circle class="stamp-ring-inner" cx="80" cy="80" r="64" />
+          <text class="stamp-text"><textPath href="#stampTop" startOffset="50%" text-anchor="middle">DAYCLEAN</textPath></text>
+          <text class="stamp-text"><textPath href="#stampBottom" startOffset="50%" text-anchor="middle">· ÅRHUS ·</textPath></text>
+          <path class="stamp-heart" d="M80 97s-15-8.5-15-19a8.5 8.5 0 0 1 15-5.5 8.5 8.5 0 0 1 15 5.5c0 10.5-15 19-15 19Z" />
+        </svg>
+      </div>
     </div>
   </div>
+  <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0,30 C240,80 480,0 720,30 C960,60 1200,0 1440,30 L1440,80 L0,80 Z"/></svg>
 </div>
 
 <div class="wrap">
@@ -234,23 +424,31 @@ footer .foot-text{color:var(--ink);opacity:.75;font-size:.85rem;margin:0}
     <h2>Hvad jeg tager mig af</h2>
     <p class="lede">Hvad jeg tager mig af, afhænger af hvad I har brug for i hverdagen.</p>
     <div class="services">
-      <div class="service">
-        <p class="mark">01</p>
+      <div class="service reveal">
+        <span class="service-icon">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></svg>
+        </span>
         <h3>360° rengøring i hjemmet</h3>
         <p>Grundig rengøring af alle rum, fra køkken og bad til de glemte hjørner.</p>
       </div>
-      <div class="service">
-        <p class="mark">02</p>
+      <div class="service reveal">
+        <span class="service-icon">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        </span>
         <h3>Diverse indkøb</h3>
         <p>Dagligvarer og ærinder klaret, så køleskabet altid er fyldt.</p>
       </div>
-      <div class="service">
-        <p class="mark">03</p>
+      <div class="service reveal">
+        <span class="service-icon">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16v3a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5v-3Z"/><path d="M2 11h20"/><path d="M9 11V8M12 11V6M15 11V8"/></svg>
+        </span>
         <h3>Madlavning</h3>
         <p>Hjemmelavet mad til hverdag, eller til en særlig anledning.</p>
       </div>
-      <div class="service">
-        <p class="mark">04</p>
+      <div class="service reveal">
+        <span class="service-icon">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c7 1 13-4 13-13 0 0-10-1-13 6-2 4-1 7 0 7Z"/><path d="M5 19c2-4 5-7 9-9"/></svg>
+        </span>
         <h3>Have og IT-opgaver</h3>
         <p>Lettere havearbejde og små IT-opgaver, der ellers bliver liggende.</p>
       </div>
@@ -259,51 +457,87 @@ footer .foot-text{color:var(--ink);opacity:.75;font-size:.85rem;margin:0}
 
   <section class="tight">
     <div class="values">
-      <div class="value">
-        <h3>Maksimal service</h3>
-        <p>Din tid og dit hjem bliver behandlet med samme omhu, hver gang.</p>
+      <div class="value reveal">
+        <span class="value-icon">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9.3-8.8C1.2 8 2.6 5 5.6 4.3 7.7 3.8 9.9 4.8 12 7c2.1-2.2 4.3-3.2 6.4-2.7 3 .7 4.4 3.7 2.9 6.9C19 15.6 12 20 12 20Z"/></svg>
+        </span>
+        <div>
+          <h3>Maksimal service</h3>
+          <p>Din tid og dit hjem bliver behandlet med samme omhu, hver gang.</p>
+        </div>
       </div>
-      <div class="value">
-        <h3>Effektivitet</h3>
-        <p>Opgaverne løses grundigt uden at fylde unødigt i din dag.</p>
+      <div class="value reveal">
+        <span class="value-icon">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 4 14h6l-1 7 9-11h-6l1-7Z"/></svg>
+        </span>
+        <div>
+          <h3>Effektivitet</h3>
+          <p>Opgaverne løses grundigt uden at fylde unødigt i din dag.</p>
+        </div>
       </div>
-      <div class="value">
-        <h3>Stabilitet</h3>
-        <p>Samme faste aftale, samme ansigt, hver eneste gang.</p>
+      <div class="value reveal">
+        <span class="value-icon">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M12 7v13M6 12H3a9 9 0 0 0 9 9 9 9 0 0 0 9-9h-3M6 12a6 6 0 0 0 6 6 6 6 0 0 0 6-6"/></svg>
+        </span>
+        <div>
+          <h3>Stabilitet</h3>
+          <p>Samme faste aftale, samme ansigt, hver eneste gang.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="tight">
+  <section class="tight reveal" id="om">
     <h2>Birgitte Friis</h2>
     <div class="about">
-      <div class="about-photo">
-        <img src="/images/logo.png" alt="" style="height:80px" />
+      <div class="about-ring">
+        <div class="about-photo">
+          <img src="/images/logo.png" alt="" style="height:80px" />
+        </div>
       </div>
       <div class="about-text">
+        <span class="quote-mark" aria-hidden="true">&rdquo;</span>
         <p>Jeg vælger bevidst at have få, faste kunder frem for mange løse opgaver. Det giver mig tid til at lære jer at kende, så jeg ved hvad der betyder noget, uden I skal sige det hver gang.</p>
         <p>Derfor er jeg nok ikke det rigtige valg til en enkelt rengøring. Men leder du efter en fast aftale med samme ansigt hver gang, nogen der passer på dit hjem som sit eget, så er det præcis det jeg tilbyder.</p>
-        <p class="signature">Birgitte</p>
+        <p class="signature">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:-2px;margin-right:4px"><path d="M12 20s-7-4.4-9.3-8.8C1.2 8 2.6 5 5.6 4.3 7.7 3.8 9.9 4.8 12 7c2.1-2.2 4.3-3.2 6.4-2.7 3 .7 4.4 3.7 2.9 6.9C19 15.6 12 20 12 20Z"/></svg>
+          Birgitte
+        </p>
       </div>
     </div>
   </section>
 
-  <section id="kontakt">
+  <section id="kontakt" class="reveal">
     <h2>Lad os finde en aftale, der passer dig</h2>
     <p class="lede">Jeg tager løbende nye faste kunder ind. Ring, skriv, eller læg en besked, så finder vi ud af om vi passer godt sammen.</p>
     <div class="contact-card">
       <div class="contact-info">
         <div class="row">
-          <p class="label">Telefon</p>
-          <p class="value-row"><a href="tel:+4561423300">61 42 33 00</a> <button class="copy-btn" data-copy="61 42 33 00">Kopiér</button></p>
+          <span class="row-icon">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c0-.6.4-1 1-1h3l2 5-2 1a9 9 0 0 0 5 5l1-2 5 2v3c0 .6-.4 1-1 1A15 15 0 0 1 4 5Z"/></svg>
+          </span>
+          <div>
+            <p class="label">Telefon</p>
+            <p class="value-row"><a href="tel:+4561423300">61 42 33 00</a></p>
+          </div>
         </div>
         <div class="row">
-          <p class="label">Email</p>
-          <p class="value-row"><a href="mailto:kontakt@dayclean.dk">kontakt@dayclean.dk</a> <button class="copy-btn" data-copy="kontakt@dayclean.dk">Kopiér</button></p>
+          <span class="row-icon">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v12H4V6Z"/><path d="m4 7 8 6 8-6"/></svg>
+          </span>
+          <div>
+            <p class="label">Email</p>
+            <p class="value-row"><a href="mailto:kontakt@dayclean.dk">kontakt@dayclean.dk</a></p>
+          </div>
         </div>
         <div class="row">
-          <p class="label">Område</p>
-          <p class="value-row" style="font-weight:500;font-size:1rem">Århus og omegn</p>
+          <span class="row-icon">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>
+          </span>
+          <div>
+            <p class="label">Område</p>
+            <p class="value-row" style="font-weight:500;font-size:1rem">Århus og omegn</p>
+          </div>
         </div>
       </div>
       <form id="contact-form">
@@ -328,33 +562,51 @@ footer .foot-text{color:var(--ink);opacity:.75;font-size:.85rem;margin:0}
 
 </div>
 
+<svg class="wave wave-up" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0,30 C240,80 480,0 720,30 C960,60 1200,0 1440,30 L1440,80 L0,80 Z"/></svg>
 <footer class="band footer-band">
-  <div class="wrap">
-    <img src="/images/logo.png" alt="DayClean logo" style="height:44px" />
-    <p class="foot-text">DayClean, privat rengøring i Århus</p>
-    <p class="foot-text">61 42 33 00</p>
+  <div class="wrap wrap-wide foot-inner">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="foot-logo">
+          <img src="/images/logo.png" alt="DayClean logo" />
+          <span class="wordmark">DayClean</span>
+        </div>
+        <p class="foot-text">Privat rengøring i Århus og omegn, med samme ansigt hver gang.</p>
+      </div>
+      <nav class="foot-links" aria-label="Sidelinks">
+        <p class="foot-heading">Sider</p>
+        <a href="#ydelser">Ydelser</a>
+        <a href="#om">Om DayClean</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+      <div class="foot-links">
+        <p class="foot-heading">Kontakt</p>
+        <a href="tel:+4561423300">61 42 33 00</a>
+        <a href="mailto:kontakt@dayclean.dk">kontakt@dayclean.dk</a>
+        <a class="btn btn-primary foot-cta" href="#kontakt">Book en snak</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p class="foot-text">DayClean, privat rengøring i Århus</p>
+    </div>
   </div>
 </footer>
 
 <script>
-document.querySelectorAll('.copy-btn').forEach(btn=>{
-  btn.addEventListener('click', async ()=>{
-    const text = btn.getAttribute('data-copy');
-    try{
-      await navigator.clipboard.writeText(text);
-      const old = btn.textContent;
-      btn.textContent = 'Kopieret';
-      setTimeout(()=>{btn.textContent = old;}, 1500);
-    }catch(e){
-      const row = btn.closest('.value-row');
-      const range = document.createRange();
-      range.selectNodeContents(row);
-      const sel = window.getSelection();
-      sel.removeAllRanges();
-      sel.addRange(range);
-    }
-  });
-});
+document.documentElement.classList.add('js-anim');
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('.reveal').forEach(el=>el.classList.add('is-visible'));
+} else {
+  const revealObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+}
 
 const form = document.getElementById('contact-form');
 const toast = document.getElementById('form-toast');
